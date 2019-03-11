@@ -1,0 +1,211 @@
+ 
+ /*分页样式*/
+ .page-style{
+    text-align: center;
+    margin-top: 32px;
+}
+.container-fluid{
+    background-color: #FFFFFF;
+    padding: 0 32px;
+    margin-bottom: 110px;
+}
+
+
+
+/*文字大小*/
+/*字体大小*/
+.font-span{
+   font-size: 14px;
+   color: #515151;
+   line-height:18px;
+   font-weight:500;
+}
+.font-em{
+    font-size: 14px;
+   color: #C1C1C1;
+   line-height:14px;
+   font-weight:500;
+}
+.font-large-em{
+   font-size: 16px;
+   color: #999999;
+   line-height:16px;
+   font-family:PingFangSC-Medium;
+   font-weight:500;
+}
+
+/*左右布局*/
+/*左右布局*/
+.flex-between{
+   display: -webkit-flex; /* Safari */
+   display:flex;
+   justify-content:space-between
+}
+/*评论区域*/
+.comment-main{
+   margin-top: 24px;
+   border-bottom: 1px solid #EEEEEE;
+   padding-bottom: 16px;
+   text-align: left;
+}
+/*全部评论数*/
+.comment-all-margin-bottom{
+   margin-bottom: 64px;
+}
+/*评论人的头像*/
+.comment-head img{
+width:48px;
+height:48px;
+border-radius:50%;
+float: left;
+}
+/*评论区的内容*/
+.comment-content{
+   margin-left: 60px;
+}
+
+
+/*评论区的三角形*/
+.arrow-up {
+width:0; 
+height:0; 
+border-left:10px solid transparent;
+border-right:10px solid transparent;
+border-bottom:10px solid rgba(246,246,246,1);
+margin-left: 20px;
+}
+/*回复框*/      
+.comment-answer{
+   background-color: rgba(246,246,246,1);
+   width: 100%;
+   padding: 0 24px;
+   padding-bottom: 22px;
+   border-radius: 4px;
+   margin-bottom: 16px
+}
+/*回复的人*/
+.margin-bottom-16{
+   margin-bottom: 16px;
+}
+/*评论的图标*/
+.comment-icon{
+   margin: 25px 0;
+   display: -webkit-flex; /* Safari */
+   display:flex;
+   justify-content:flex-end;
+}
+.comment-icon li{
+   margin-left: 36px;
+}
+input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
+color: #C1C1C1;
+font-size: 14px;
+}
+
+input:-moz-placeholder, textarea:-moz-placeholder {
+color: #C1C1C1;
+font-size: 14px;
+}
+
+input::-moz-placeholder, textarea::-moz-placeholder {
+color: #C1C1C1;
+font-size: 14px;
+}
+
+input:-ms-input-placeholder, textarea:-ms-input-placeholder {
+color: #C1C1C1;
+font-size: 14px;
+}
+/*评论框*/
+.comment-textarea{
+background:rgba(246,246,246,1);
+border-radius:4px;
+padding: 13px 14px;
+width: 78%;
+height: 40px;
+border: none;
+resize: none;
+color: #C1C1C1;
+font-size: 14px;
+line-height:14px;
+overflow-y:hidden
+}
+/*发表按钮的下外边距*/
+.comment-margin-bottom{
+margin-bottom: 16px;
+}
+/*评论数*/
+.comment-margin-right{
+margin-right: 16px;
+}
+/*评论的人与评论时间的间距*/
+.commentuser-margin-right{
+margin-right: 24px;
+}
+.commentuser-margin-right-17{
+margin-right: 17px;
+}
+.commentuser-margin-bottom{
+margin-bottom: 20px;
+}
+/*回复按钮--该页面*/
+.answer-style{
+float: right;
+cursor: pointer;
+color: #4959F6
+}
+.answer-style:hover{
+color: #7d89fb
+}
+/*关注按钮*/
+.user-btn{
+background: #4959F6;
+width: 88px;
+height: 40px;
+border-radius:4px;      
+}
+
+/*本页面*/
+/*删除评论*/
+.deleteBtn{
+   text-align: right;
+   padding-top: 5px;
+}
+/*删除按钮的样式*/
+.deleteStyle{
+   color: #515151;
+   cursor: pointer;
+}
+.deleteStyle:hover{
+   color:#aba2a2
+}
+/*该页面另写的*/
+/*公告的图标*/
+.notice-icon{
+border-radius: 50%;    
+width:48px;
+height:48px;
+background:rgba(73,89,246,1);   
+display: inline-block;         
+vertical-align: top;
+}
+.notice-icon-font{
+display: block;         
+text-align: center;
+font-size:24px;
+font-family:PingFangSC-Semibold;
+font-weight:600;
+color:rgba(255,255,255,1);
+line-height:48px;
+}
+.comment-head{
+float: left;
+}
+
+/*没有消息的时候*/
+.nullNews{
+height: 800px;
+}
+.nullNews-font{
+margin-top: 200px
+}
