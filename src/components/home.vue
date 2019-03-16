@@ -1,9 +1,11 @@
 <template>
   <div class="home">
     <div class="wrapper">
-      <swiper></swiper>
-      <recommend-bar></recommend-bar>
-      <sort-content></sort-content>
+        <swiper></swiper>
+        <div class="content">
+          <sort-content></sort-content>
+          <recommend-bar></recommend-bar>
+        </div> 
     </div>
   </div> 
 </template>
@@ -45,5 +47,10 @@ export default{
     width: 1136px;
     margin: 0 auto;
     background-color: #fff;
+  }
+  .content{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
   }
 </style>

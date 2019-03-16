@@ -1,11 +1,11 @@
 <template>
-  <div>
+  <div class="wrap">
     <sort-bar :current='index' @change-sort='handleChangeCurrent'></sort-bar>
     <div class="sort-content">
       <div class="content-list">
         <card v-for="item of list" :key="item.id" :data="item"></card>
       </div>     
-      <aside-rank v-if='isRankShow' @listenData='isShow'></aside-rank>
+      <!-- <aside-rank v-if='isRankShow' @listenData='isShow'></aside-rank> -->
     </div>
     <div class="load">
       <div class="load-btn" @click='handleLoadMore' v-if="!isListEnd">查看更多</div>
@@ -37,17 +37,16 @@ export default {
       page: 1,
       pageSize: 32,
       isListEnd: false,
-      isRankShow:false
     }
   },
   methods: {
-    isShow(data){
-      if(!data||data.length==0){
-        this.isRankShow=false
-      }else{
-        this.isRankShow=true
-      }
-    },
+    // isShow(data){
+    //   if(!data||data.length==0){
+    //     this.isRankShow=false
+    //   }else{
+    //     this.isRankShow=true
+    //   }
+    // },
     handleChangeCurrent (index) {
       this.list = [];
       this.isListEnd = false;
@@ -108,6 +107,7 @@ export default {
 
 <style scoped>
 .sort-content {
+  width: 910px;
   display: flex;
   background-color: #F6F6F6;
   padding-top: 24px;
@@ -137,9 +137,7 @@ export default {
 }
 
 .load {
-  position: absolute;
-  left: 0;
-  right: 0;
+  width: 910px;
   padding-top: 40px;
   padding-bottom: 56px;
   background-color: #f6f6f6;

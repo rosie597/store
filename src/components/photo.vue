@@ -1,9 +1,11 @@
 <template>
 	<div class="photo">
-    <div class="wrapper">
-      <swiper></swiper>
-      <recommend-bar></recommend-bar>
-      <sort-content></sort-content>
+     <div class="wrapper">
+        <swiper></swiper>
+        <div class="content">
+          <sort-content></sort-content>
+          <recommend-bar></recommend-bar>
+        </div> 
     </div>
 	</div>
 </template>
@@ -36,9 +38,15 @@ export default{
     background-color: #f5f5f5;
   }
   
-  .wrapper {
+ .wrapper {
     width: 1136px;
     margin: 0 auto;
     background-color: #fff;
+  }
+  .content{
+    width: 100%;
+    background-color: #fff;
+    display: flex;
+    flex-direction: row;
   }
 </style>

@@ -33,8 +33,9 @@ export default {
 
 <style scoped>
 .sort-bar {
-  width: 1136px;
+  width: 910px;
   margin-top: 26px;
+  background-color: #fff;
 }
 
 ul.navigation {

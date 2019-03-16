@@ -13,7 +13,7 @@
     				<!-- 登陆表单 -->
     				<el-form :model="ruleForm"  :rules="rules" ref="ruleForm"  class="form" v-loading.fullscreen.lock="fullscreenLoading" element-loading-text="加载中..." v-if='status' key='form1'>
 					  <el-form-item prop="account">
-					    <el-input type="text" v-model="ruleForm.account" autocomplete="on" placeholder='请输入账号' class='loginIpt'></el-input>
+					    <el-input type="text" v-model="ruleForm.account" autocomplete="on" placeholder='请输入手机号或邮箱' class='loginIpt'></el-input>
 					  </el-form-item>
 					  <el-form-item prop="password">
 					    <el-input :type="passVisible1?'text':'password'" v-model="ruleForm.password" autocomplete="on" placeholder='请输入密码'  class='loginIpt' @keyup.enter.native="submitForm('ruleForm')"></el-input>
@@ -27,7 +27,7 @@
     				<!-- 注册表单 -->
     				<el-form :model="ruleForm2"  :rules="rules2" ref="ruleForm2"  class="form" v-loading.fullscreen.lock="fullscreenLoading" element-loading-text="加载中..." v-if='!status' key='form2'>
 					  <el-form-item prop="account">
-					    <el-input type="text" v-model="ruleForm2.account" autocomplete="on" placeholder='请输入账号' class='loginIpt'></el-input>
+					    <el-input type="text" v-model="ruleForm2.account" autocomplete="on" placeholder='请输入手机号或邮箱' class='loginIpt'></el-input>
 					  </el-form-item>
 					  <el-form-item prop="password">
 					    <el-input :type="passVisible1?'text':'password'" v-model="ruleForm2.password" autocomplete="on" placeholder='请输入密码'  class='loginIpt'></el-input>
@@ -230,16 +230,18 @@
         			method:'post',
         			url:this.domainName+'/user/regist',
         			data:data
-        		}).then((res)=>{
-        			if(res.data.code==20000){
+        		}).then((res1)=>{
+        			if(res1.data.code==20000){
         				this.$message({
 				          message: '注册成功',
 				          type: 'success'
 				        });
-				        this.tab_='tab1'
-				        this.status=true
+				        // this.tab_='tab1'
+				        // this.status=true
+				        this.$emit('regist')
+				        this.loginReq(res)
         			}else{
-        				this.$message.error('注册失败');
+        				this.$message.error(res1.data.message);
         			}
         			this.fullscreenLoading = false;
         		}).catch((err)=>{

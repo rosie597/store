@@ -1,8 +1,9 @@
 <template>
   <div class="recomend-bar">
-    <recommend-work :workList="workList"></recommend-work>
-    <recommend-artical :articalList="articalList"></recommend-artical>
     <recommend-author :authorList="authorList"></recommend-author>
+    <recommend-work :workList="workList"></recommend-work>
+    <recommend-artical :articalList="articalList"></recommend-artical>  
+    <aside-rank></aside-rank>
   </div>
 </template>
 
@@ -10,6 +11,7 @@
 import RecommendAuthor from './components/RecommendAuthor'
 import RecommendArtical from './components/RecommendArtical'
 import RecommendWork from './components/RecommendWork'
+import AsideRank from './components/AsideRank'
 
 import axios from 'axios'
 
@@ -18,7 +20,8 @@ export default {
   components: {
     RecommendAuthor,
     RecommendArtical,
-    RecommendWork
+    RecommendWork,
+    AsideRank
   },
   data () {
     return {
@@ -33,6 +36,7 @@ export default {
         .then((res) => {
           if(res.status === 200 && res.data.data) {
             this.workList = res.data.data.rows || []
+            console.log(this.workList)
           }
         })
     },
@@ -48,7 +52,7 @@ export default {
       axios.get(this.domainName+'/user/recommend')
         .then((res) => {
           if(res.status === 200 && res.data.data) {
-            this.authorList = res.data.data || []
+            this.authorList = res.data.data.splice(0,3) || []
           }
         }) 
     }
@@ -65,6 +69,9 @@ export default {
 
 <style scoped>
 .recomend-bar {
+  background-color: #f5f5f5;
   display: flex;
+  flex-direction: column;
+  margin-top:40px;
 }
 </style>

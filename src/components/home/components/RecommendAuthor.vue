@@ -20,6 +20,11 @@ export default {
       type: Array
     }
   },
+  data(){
+    return{
+      list:[]
+    }
+  },
   methods: {
     handleToUserDetail (id) {
       let param = {
@@ -31,6 +36,8 @@ export default {
       }
       this.$router.push(param)
     }
+  },
+  mounted(){
   }
 }
 </script>
@@ -38,30 +45,35 @@ export default {
 
 <style scoped>
 .author {
-  margin-left: 22px;
+  width: 226px;
   font-family: PingFangSC-Medium;
   color: #515151;
+  background-color: #fff;
+  padding-left: 10px;
 }
 
 .title1 {
   text-align: left;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 }
 
 .title1 > h3 {
-  margin-top: 32px;
+  margin-top: 22px;
   font-size: 18px;
+  padding-left: 10px;
 }
 
 .user-list {
   display: flex;
-  flex-wrap: wrap;
+  display: flex;
+  flex-direction: column;
 }
 
 .user-item {
-  width: 60px;
+  display: flex;
+  flex-direction: row;
   margin: 0 4px;
-  margin-bottom: 30px;
+  margin-bottom: 15px;
 }
 
 .user-item:hover {
@@ -73,10 +85,10 @@ export default {
   width: 48px;
   height: 48px;
   border-radius: 50%;
+  margin-right: 10px;
 }
 
 .user-item > .name {
-  width: 100%;
   margin-top: 16px;
   text-align: center;
   font-size: 14px;

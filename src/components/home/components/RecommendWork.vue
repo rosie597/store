@@ -8,19 +8,21 @@
       </a>
     </div>
     <div class="card-list">
-      <card :data="workList[0] || {}"></card>
-      <card :data="workList[1] || {}"></card>
+      <recommend-card :data="workList[0] || {}" v-if='workList[0]'></recommend-card>
+      <recommend-card :data="workList[1] || {}" v-if='workList[1]'></recommend-card>
+      <recommend-card :data="workList[2] || {}" v-if='workList[2]'></recommend-card>
     </div>
   </div>
 </template>
 
 <script>
-import Card from './Card'
+// import Card from './Card'
+import RecommendCard from './RecommendCard'
 
 export default {
   name: 'RecommendWork',
   components: {
-    Card
+    RecommendCard
   },
   props: {
     workList: { 
@@ -40,9 +42,10 @@ export default {
 
 <style scoped>
 .photo {
-  width: 446px;
-  background-color: #fff;
+  width: 226px;
   font-family: PingFangSC-Medium;
+  background-color: #fff;
+  padding-left: 10px;
 }
 
 .title {
@@ -79,6 +82,7 @@ export default {
   display: flex;
   width: 446px;
   justify-content: space-between;
+  flex-direction: column;
 }
 </style>
 

@@ -15,6 +15,7 @@ export default new Vuex.Store({
 		searchVal:'',//搜索值
 		sortNum:'visits',
 		typeNum:'',
+		regist:false,
 	},
 	mutations:{
 		clearData(state){

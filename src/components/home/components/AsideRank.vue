@@ -30,7 +30,7 @@ export default {
   data () {
     return {
       rank: 1,
-      rankList: [{}]
+      rankList: []
     }
   },
   methods: {
@@ -49,7 +49,6 @@ export default {
     handleGetRankListSucc (res) {
       if (res.data.code === 20000) {
         this.rankList = res.data.data;
-        this.$emit('listenData',res.data.data)
       }
     }
   },
@@ -85,7 +84,9 @@ export default {
 
 .switch-btn {
   display: flex;
+  justify-content: center;
   margin-top: 16px;
+
 }
 
 .switch-btn .btn {

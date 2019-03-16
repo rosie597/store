@@ -3,7 +3,7 @@
 		<div class="top">
 	        <span class="top_logo">logo</span>
 		    <div class="box1">
-		    	<span :class="$route.path.endsWith('/')?linkClass[0]:linkClass[1]" @click="$router.replace('/')">首页</span>
+		    	<span :class="$route.path.endsWith('/')?linkClass[0]:linkClass[1]" @click="$router.replace('/')">作品</span>
 		    	<span :class="$route.path.includes('/photo')?linkClass[0]:linkClass[1]" @click="$router.replace('/photo')">摄影</span>
 		    	<span :class="$route.path.includes('/articles')?linkClass[0]:linkClass[1]" @click="$router.replace('/articles')">文章</span>
 		    </div>
@@ -27,7 +27,7 @@
 				</div>
 			<!-- </div>
 			<div class="hoverBox" :style="$store.state.isLogin?'':'margin-left:15%;'"> -->
-				<span class="hover_b" @click="toContribute(3)" @mouseenter="hoverFn(3)" @mouseleave="hoverFn(4)">投稿</span>
+				<span class="hover_b" @click="toContribute()" @mouseenter="hoverFn(3)" @mouseleave="hoverFn(4)">投稿</span>
 				<!-- 投稿划过框 -->
 				<div class="itemsBox" v-if="isItemShow" @mouseenter="hoverFn(3)" @mouseleave="hoverFn(4)" :style="$store.state.isLogin?'':'left:-19px;'">
 					<span v-for="(item,index) of items" :key='item' class="item_" @click="toContribute(index)">{{item}}</span>
@@ -58,7 +58,7 @@
     	</div>
 
     	<div class="greyCtn" v-if='isLgShow' id="greyCtn">
-    		<login-bar v-on:listenClose='recieveCancel' v-bind:tab='tab' v-on:listenSuccess='login'></login-bar>
+    		<login-bar v-on:listenClose='recieveCancel' v-bind:tab='tab' v-on:listenSuccess='login' @regist='listenRegist'></login-bar>
     	</div>
 	</div>
 </template>
@@ -182,19 +182,17 @@
       		toContribute(idx){
       			if(this.$store.state.isLogin==true){
       				switch(idx){
-	      				case 0:{
-	      					this.$router.replace('/newWork')
-	      				}break;//艺术作品
-	      				case 1:{
-	      					this.$router.replace('/newPhotograph')
-	      				}break;//摄影
-	      				case 2:{
-	      					this.$router.replace('/newArticle')
-	      				}break;//文章
-	      				default:{
-	      					this.$router.replace('/newWork')
-	      				}break;
+      					case 0:{
+      						this.$router.replace('/newWork')
+      					}break;
+      					case 1:{
+      						this.$router.replace('/newPhotograph')
+      					}break;
+      					case 2:{
+      						this.$router.replace('/newArticle')
+      					}break;
       				}
+      				
       			}else{
       				this.loginClk('tab1')
       			}
@@ -314,6 +312,17 @@
 	        login(){
 	        	let id=this.$store.state.userData.id
 	        	this.initWebSocket(id);
+	        },
+	        //注册成功后添加欢迎语
+	        listenRegist(){
+	        	var date=new Date()
+				var time=Number(date.getYear()+1900)+'-'+Number(date.getMonth()+1)+'-'+date.getDate()
+				this.hasNotice=true
+	        	this.notice.unshift({
+	        		msg:'等你很久了，朋友，欢迎你加入彩罐网。',
+	        		sendDate:time
+	        	})
+	        	this.$store.state.regist=true
 	        }
 		},
 

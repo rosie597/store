@@ -59,9 +59,9 @@
                 <div v-for="(item,index) in workList" style="width: 208px;margin: 0 10px;display: inline-block;">
                   <b-card img-top class="work">
                     <a  v-if="!visitorFlag" href="javascript:;" class="deleteButton" @click="deleteFavorite(item.id,index)">×</a>
-                    <b-card-img @click="checkWork(item.id)" :src="item.cover" class="authorPicture"></b-card-img>
+                    <b-card-img @click="checkWork(item.workId)" :src="item.cover" class="authorPicture"></b-card-img>
                     <div class="author">
-                      <p  @click="checkWork(item.id)">{{item.title}}</p>
+                      <p  @click="checkWork(item.workId)">{{item.title}}</p>
                       <img @click="checkUser(item.userId)" :src="item.avatar" :alt="item.nickname">
                       <strong @click="checkUser(item.userId)">{{item.nickname}}</strong>
                       <span>{{item.postTime}}</span>
@@ -200,7 +200,7 @@
              @crop-upload-fail="cropImgFail"
              :width="300"
              :height="300"
-             url="http://119.29.176.47:9001/qiniu/upload"
+             url="http://www.colourcan.net/api/qiniu/upload"
              img-format="png"></imgCrop>
   </div>
 </template>
@@ -448,18 +448,38 @@
         this.materialData.province = data.province.value;
       },
       setRecordType:function(type){
+        let self = this;
         this.recordType = type;
-        this.recordData();
+        if(type === ''){
+          let self = this;
+          this.$axios({
+            method: 'get',
+            baseURL: self.domainName+'/favourite',
+            params:{
+              pageNum: self.recordPage,
+              pageSize: 20,
+              userId: self.userId
+            }
+          }).then((res)=>{
+            self.workList = res.data.data.rows;
+            self.recordTotal = res.data.data.total;
+          }).catch((error)=>{
+            self.$message('获取收藏夹信息失败');
+          })
+        }else{
+          this.recordData();
+        }
       },
       recordData(){
         let self = this;
         this.$axios({
           method: 'get',
-          baseURL: self.domainName+'/favourite/'+ self.userId,
+          baseURL: self.domainName+'/favourite',
           params:{
             type: self.recordType,
             pageNum: self.recordPage,
-            pageSize: 20
+            pageSize: 20,
+            userId: self.userId
           }
         }).then((res)=>{
           self.workList = res.data.data.rows;
@@ -511,18 +531,26 @@
         for (let key in this.materialData){
           uploadData[key] = this.materialData[key];
         }
-        uploadData.mobile = uploadData.mobile.toString();
-        uploadData.birthday = this.birthdayYear+ '-' +this.birthdayMonth;
-        let province = uploadData.province;
-        uploadData.province = province.slice(0, -1);
-        let city = uploadData.city;
-        uploadData.city = city.slice(0,-1);
+        try {
+          uploadData.mobile = uploadData.mobile.toString();
+          uploadData.birthday = this.birthdayYear+ '-' +this.birthdayMonth;
+          let province = uploadData.province;
+          uploadData.province = province.slice(0, -1);
+          let city = uploadData.city;
+          uploadData.city = city.slice(0,-1);
+        }catch(e){
+          this.$message('请补充信息');
+          return;
+        }
         this.$axios({
           method: 'put',
           baseURL: self.domainName+'/user',
           data: uploadData
         }).then((res)=>{
-          self.$message('修改个人资料成功');
+          self.$message({
+            message: '修改个人资料成功',
+            type: 'success'
+          });
           self.materialDataGet();
           self.getBaseInfo();
           let userData=self.$store.state.userData;
@@ -567,7 +595,7 @@
 
       this.visitorFlag = cookieId != this.userId;
       let self = this;
-      this.recordData();
+      this.setRecordType('');
       this.getBaseInfo();
       // 取得当前用户id
       // var userData=JSON.parse(this.$store.state.userData);
@@ -692,7 +720,7 @@
     color: #515151;
   }
   .category .active{
-    color: #fff;
+    /*color: #fff;*/
   }
   /*发布记录*/
   .datepicker{
@@ -711,6 +739,8 @@
   /*收藏夹*/
   .workList{
     padding-left: 30px;
+    padding-top: 20px;
+    text-align: left;
   }
   .work{
     margin-bottom: 24px;
@@ -770,7 +800,7 @@
     height: 24px;
     text-align: center;
     font-size: 25px;
-    line-height: 20px;
+    line-height: 25px;
     border-radius: 4px;
     background: rgba(0,0,0,0.5);
     text-decoration: none;
@@ -816,6 +846,10 @@
     height: 40px;
     border-radius: 3px;
     border-color: #ccc;
+  }
+  .country-el-select{
+    position: relative;
+    bottom: 3px;
   }
   .profession-el-select{
     width: 272px;

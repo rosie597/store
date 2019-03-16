@@ -103,7 +103,7 @@
           </div>
           <div class="side ">
               <ul class="user  common-style">
-                  <li class="head-sculpture"><img :src="imgs.head"></li>
+                  <li class="head-sculpture"><img :src="imgs.head" @click='toSelf'></li>
                   <li class="username"><h1>{{nickname}}</h1></li>
                   <li class="user-description"><h2>{{personalDescription}}</h2></li>
                   <li> <button type="button" class="btn btn-primary user-btn btn-my-style" v-show="!showLike" @click="likeFun('like')" :disabled ='userData.id ==userId '>关注</button></li>
@@ -258,6 +258,17 @@
         }
     },
     methods:{
+        //到个人主页
+        toSelf(){
+          let param = {
+            path: '/personalHome',
+            name:'personalHome',
+            params: {
+              'id':this.userId
+            } 
+          }
+          this.$router.push(param)
+        },        
         //获取文章页面
         getDetail(){
             return this.$axios.get(this.domainName + '/work/'+this.ownerId,{
@@ -733,10 +744,11 @@
                 }).then((res)=>{
                     if(res.data.code === 20000){
                     this.showCollection = !this.showCollection;
+                    this.$message.success('收藏成功')
                         this.favouriteNum = res.data.data;
                     }
                 }).catch((error)=>{
-
+                     this.$message.error('收藏失败，请重试')
                 })
             }
              
@@ -755,6 +767,7 @@
                 }).then((res)=>{
                 if(res.data.code === 20000){
                     this.showCollection = !this.showCollection;
+                    this.$message.success('取消收藏成功');
                         this.favouriteNum  = res.data.data;
 
                     }

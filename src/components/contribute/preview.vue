@@ -57,11 +57,11 @@
 
           <b-col class="right">
             <div class="headPicture">
-              <img :src="headPicture" alt="头像">
+              <img :src="avatar" alt="头像">
             </div>
             <div class="information">
-              <h2 class="name">{{name}}</h2>
-              <p class="slogan">{{slogan}}</p>
+              <h2 class="name">{{nickname}}</h2>
+              <p class="slogan">{{personalDescription}}</p>
             </div>
             <div class="status">
               <p class="statusBox">
@@ -96,9 +96,9 @@
         name: "preview",
       data:function () {
         return {
-          name: '囿于山河湖海...',
-          slogan: '很久没发作品了，不过下半年应该',
-          headPicture:'https://www.qq745.com/uploads/allimg/160722/8-160H2103338.jpg',
+          nickname: '囿于山河湖海...',
+          personalDescription: '很久没发作品了，不过下半年应该',
+          avatar:'https://www.qq745.com/uploads/allimg/160722/8-160H2103338.jpg',
           title:'人子X',
           tag: ['原创作品','插画','手绘'],
           description: '“所谓漫才啊，就是不管他是要卖鱼还是卖菜，都是漫才！”——「神谷」。总结之前练习的一些东西和感悟，作为自己的笔记吧！',
@@ -112,7 +112,6 @@
       },
       created(){
         let data = this.$route.params.workData;
-        console.log(data);
         if (data == undefined){
           this.$router.go(-1);
           return false;
@@ -121,6 +120,10 @@
         this.tag = data.tag;
         this.description = data.description;
         this.content = data.content;
+        let userData = this.$store.state.userData;
+        this.avatar = userData.avatar;
+        this.nickname = userData.nickname;
+        this.personalDescription = userData.personalDescription;
       },
       deactivated() {
         this.$destroy()

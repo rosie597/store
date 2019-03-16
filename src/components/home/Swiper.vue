@@ -5,6 +5,8 @@
         <img class="img" :src="cover.url">
       </swiper-slide>
       <div class="swiper-pagination" slot="pagination"></div>
+      <div class="swiper-button-prev swiper-button-black" slot="button-prev"></div>
+      <div class="swiper-button-next swiper-button-black" slot="button-next"></div>
     </swiper> 
   </div>
 </template>
@@ -44,9 +46,14 @@ export default {
           type: 'bullets',
           bulletClass: 'pagination',
           bulletActiveClass : 'pagination-active',
-        }
+        },
+        navigation: {
+          clickable: true,
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
       },
-      covers: []
+      covers: [],
     };
   },
 
@@ -116,6 +123,9 @@ export default {
 }
 .img{
   width: 100%;
+}
+.swiper-button-black{
+  
 }
 </style>
 

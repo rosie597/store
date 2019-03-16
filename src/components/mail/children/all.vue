@@ -1,5 +1,17 @@
 <template>
 	<div class="container-fluid">
+        <div class="comment-main flex" v-if='isShow'>
+            <span   class="notice-icon" >  
+                    <span  class="notice-icon-font" >公</span>  
+            </span>
+            <div class="text">
+                等你很久了，朋友，欢迎你加入彩罐网。<br/><br/>在这里，我们以“艺术”会友，作品、摄影、内容，都将会是我们的交谈核心；<br/>
+在这里，你会遇到和你一样的，追求艺术，追求美，追求心之所向的朋友；<br/>
+在这里，你会凭借着你的艺术感悟收获一大波小粉丝；<br/>
+在这里，你可以记录下，你在”艺术之路”上成长的点点滴滴，这里就是你的艺术作品相册。<br/>
+<br/> 开始吧，开始你的艺术之旅。
+            </div>
+        </div>
         <div class="nullNews" v-if="comment.length == 0">
                   <p class="nullNews-font">没有消息...</p>
         </div>
@@ -41,7 +53,8 @@ export default {
             commentIndex:-1,
             /*回复评论的内容*/
             answerCommentValue:'',
-            page:1
+            page:1,
+            isShow:this.$store.state.regist
 
 	  }
     },
@@ -67,5 +80,11 @@ export default {
 </script>
 
 <style scoped>
-
+    .flex{
+        display: flex;
+        flex-direction: row;
+    }
+    .text{
+        margin-left: 10px;
+    }
 </style>
