@@ -261,6 +261,7 @@
   }
   .main{
     margin-top: 0;
+    padding-bottom: 50px;
   }
   .row{
     margin-bottom: 15px;
@@ -385,5 +386,6 @@
   }
   .footer{
     text-align: center;
+    background: inherit;
   }
 </style>

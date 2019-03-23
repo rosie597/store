@@ -46,11 +46,12 @@
     			</div>
     			<div class="icon_bar">
     				<img :src="wechatOn?loginImgs[1]:loginImgs[0]" 
-    				@mouseover="hoverFn(0)"  @mouseout="hoverFn(1)" style="cursor: pointer;">
-    				<img :src="qqOn?loginImgs[3]:loginImgs[2]" @mouseover="hoverFn(2)" @mouseout="hoverFn(3)"style="cursor: pointer;">
+    				@mouseover="hoverFn(0)"  @mouseout="hoverFn(1)" style="cursor: pointer;" id='wechatLogin' @click='wechatLogin'>
+    				<img :src="qqOn?loginImgs[3]:loginImgs[2]" @mouseover="hoverFn(2)" @mouseout="hoverFn(3)"style="cursor: pointer;" id='qqLogin' @click='qqLogin'>
     			</div>
     		</div>
 </template>
+<script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" data-appid="101554402" data-redirecturi="http://www.colourcan.net" charset="utf-8" ></script>
 <script>
 	export default{
 		name:'loginBar',
@@ -211,6 +212,28 @@
         		})
       			})
       		},
+      		//qq登录
+      		qqLogin(){
+      			this.$axios({
+        			method:'get',
+        			url:'http://www.colourcan.net/api/social/qq/login',
+        		}).then((res)=>{
+        			console.log(res.data.data)
+        			QC.Login.showPopup({
+					   appId:"101554402",
+					   redirectURI:res.data.data
+					});
+      				// window.open(res.data.data, '_blank')
+      				// setTimeout(function(){
+      				// 	console.log(QC.Login.check())
+      				// },10000)
+        		})
+      			
+      		},
+      		//微信登录
+      		wechatLogin(){
+
+      		},
       		//注册请求
       		registFn(res){
       			var data={}
@@ -270,16 +293,45 @@
 						this.passVisible2=!this.passVisible2
 					}break;
 				}
-			}
+			},
+			callback(obj){
+	           var openid = obj.openid;
+	           console.log('obj',obj)
+	           $("#openid").text(openid);
+	           
+	           //跳转服务端登录url
+	           var resulturl = "@{openapi.QQs.login_result()}"; 
+	           var accessToken = $("#accessToken").text();
+	           
+	           //向服务端传输access_token及openid参数
+	           document.location.href=resulturl + "?access_token=" + accessToken + "&openid=" + openid;
+	        }
 		},
 		mounted(){
 			this.tab_=this.tab
 			this.status=this.tab_=='tab1'?true:false
+			// QC.Login({
+			//        btnId:"qqLogin",//插入按钮的节点id
+			//        scope:"all",
+			// }, function(reqData, opts){//登录成功
+			//        //根据返回数据，更换按钮显示状态方法
+			//        console.log('登录成功',reqData,opts)
+			//    }, function(opts){//注销成功
+			// 		alert('QQ登录 注销成功');
+
+			// });
+			 QC.Login({
+				  btnId : "qqLogin",//插入按钮的html标签id
+				  size : "B_M",//按钮尺寸
+				  scope : "all",//展示授权，全部可用授权可填 all
+				  display : "pc"//应用场景，可选
+				 });
+
 		}
 	}
 </script>
 <style scoped>
-		.login_bar{
+	.login_bar{
 		width: 30%;
 		background-color: white;
 		display: flex;
