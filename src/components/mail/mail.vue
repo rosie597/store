@@ -164,8 +164,6 @@ export default {
 						this.getNotice({pageNum:this.page,type:1})
 						this.getComment({pageNum:this.page,type:2})
 		},
-		mounted(){
-		}
 	}
 </script>
 

@@ -10,8 +10,10 @@
       </div>
       <el-row class="atten">
         <el-col :span="4" :offset="6">
-          <span>{{baseInfo.popularity}}</span>
-          <p>人气</p>
+          <router-link :to="{path: '/personalHome', name:'personalHome', params:{id: userId}}" class="personalTag">
+            <span>{{baseInfo.popularity}}</span>
+            <p>人气</p>
+          </router-link>
         </el-col>
         <el-col :span="4">
           <router-link :to="{path:'/personalHome/focusfans',name:'focusfans',params:{id: userId}}" class="personalTag">
@@ -32,67 +34,9 @@
           <el-col :span="3" class="tab-tag"><p><a href="javascript:;" @click="changeTab(1)">粉丝</a></p><span></span></el-col>
         </el-row>
         <div class="tab-content" id="pills-tabContent" style="background: #f6f6f6;position: relative;top: -0.5rem;">
-          <!--关注-->
-          <div class="tab-show active" style="padding-top: 32px;padding-bottom: 10px;">
-            <b-card-group deck class="focusList">
-              <div v-for="item in focusList">
-                <b-card style="max-width: 20rem;"
-                        class="mb-2 focus">
-                  <b-img :src="item.avatar" @click="checkPeople(item.id)"
-                         style="cursor: pointer"
-                         rounded="circle" width="64" height="64"
-                         alt="img" class="m-1 focusHeadPicture" />
-                  <div style="height: 50px;max-width: 160px;white-space: nowrap;">
-                    <p class="focusName" style="cursor: pointer" @click="checkPeople(item.id)">{{item.nickname}}</p>
-                    <p class="focusSlogan">{{item.personalDescription.length > 10? item.personalDescription.slice(0,10) + '...' : item.personalDescription}}</p>
-                  </div>
-                  <b-button variant="primary" class="followTrue"
-                            v-if="!item.islike" @click="followThem(true, item)">
-                    <span>关注</span>
-                  </b-button>
-                  <b-button variant="primary" class="followFalse"
-                            v-if="item.islike" @click="followThem(false, item)">
-                    <span>已关注</span>
-                  </b-button>
-                </b-card>
-              </div>
-            </b-card-group>
-            <b-pagination v-if="focusList != undefined && focusList.length!=0"
-                              :total-rows="focusTotal" :per-page="20"
-                              v-model="focusPageNum" @click="getFans"
-                              align="center" hide-goto-end-buttons  />
-          </div>
 
-          <!--粉丝-->
-          <div class="tab-show" style="padding-top: 32px;padding-bottom: 10px;">
-            <b-card-group deck class="fansList">
-              <div v-for="item in fansList">
-                <b-card style="max-width: 20rem;"
-                        class="mb-2 fans">
-                  <b-img :src="item.avatar" @click="checkPeople(item.id)"
-                         style="cursor: pointer"
-                         rounded="circle" width="64" height="64"
-                         alt="img" class="m-1 fansHeadPicture" />
-                  <div style="height: 60px;max-width: 160px;white-space: nowrap;">
-                    <p class="nickname" style="cursor: pointer" @click="checkPeople(item.id)">{{item.nickname}}</p>
-                    <p class="fansSlogan">{{item.personalDescription.length > 10? item.personalDescription.slice(0,10) : item.personalDescription}}</p>
-                  </div>
-                  <b-button variant="primary" class="followTrue"
-                            v-if="!item.islike" @click="followThem(true, item)">
-                    <span>关注</span>
-                  </b-button>
-                  <b-button variant="primary" class="followFalse"
-                            v-if="item.islike" @click="followThem(false, item)">
-                    <span>已关注</span>
-                  </b-button>
-                </b-card>
-              </div>
-            </b-card-group>
-            <b-pagination :total-rows="fansTotal" :per-page="20"
-                          v-model="fansPageNum" @click="getFollow"
-                          v-if="fansList != undefined && fansList.length!=0"
-                          align="center" hide-goto-end-buttons  />
-          </div>
+
+
         </div>
       </div>
     </div>
@@ -254,9 +198,6 @@
       this.getBaseInfo();
       this.getFollow();
       this.getFans();
-    },
-    deactivated() {
-      this.$destroy();
     }
   }
 </script>

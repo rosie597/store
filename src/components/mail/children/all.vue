@@ -1,22 +1,24 @@
 <template>
 	<div class="container-fluid">
-        <div class="comment-main flex" v-if='isShow'>
-            <span   class="notice-icon" >  
-                    <span  class="notice-icon-font" >公</span>  
-            </span>
-            <div class="text">
-                等你很久了，朋友，欢迎你加入彩罐网。<br/><br/>在这里，我们以“艺术”会友，作品、摄影、内容，都将会是我们的交谈核心；<br/>
-在这里，你会遇到和你一样的，追求艺术，追求美，追求心之所向的朋友；<br/>
-在这里，你会凭借着你的艺术感悟收获一大波小粉丝；<br/>
-在这里，你可以记录下，你在”艺术之路”上成长的点点滴滴，这里就是你的艺术作品相册。<br/>
-<br/> 开始吧，开始你的艺术之旅。
-            </div>
-        </div>
         <div class="nullNews" v-if="comment.length == 0">
                   <p class="nullNews-font">没有消息...</p>
         </div>
         <div v-else>
+           <div class="comment-main" v-if="$store.state.regist">
+                <div class="comment-head">
+                    <span v-if="true"   class="notice-icon" >  
+                        <span    class="notice-icon-font" >公</span>  
+                    </span>
+                </div><!--公告-->
+                <div class="comment-content">
+                    <div class="commentuser-margin-bottom">
+                        <span  class="font-span commentuser-margin-right">{{welcome}}</span>
+                    </div>
+                    <!--评论的人名和时间-->
+                </div><!--评论回复内容区域-->
+            </div>
 		 <div class="comment-main" v-for="(item ,index ) in comment" :value="index" :key="item.id">
+            
             <div v-if="item.showType== 1">
                   <new-notice :item="item" :index="index"></new-notice>
             </div><!--公告-->
@@ -54,8 +56,7 @@ export default {
             /*回复评论的内容*/
             answerCommentValue:'',
             page:1,
-            isShow:this.$store.state.regist
-
+            welcome:" 等你很久了，朋友，欢迎你加入彩罐网。 \r\n 在这里，我们以“艺术”会友，作品、摄影、内容，都将会是我们的交谈核心； \r\n 在这里，你会遇到和你一样的，追求艺术，追求美，追求心之所向的朋友； \r\n 在这里，你会凭借着你的艺术感悟收获一大波小粉丝； \r\n 在这里，你可以记录下，你在”艺术之路”上成长的点点滴滴，这里就是你的艺术作品相册。 \r\n 开始吧，开始你的艺术之旅。"
 	  }
     },
     methods:{
@@ -80,11 +81,7 @@ export default {
 </script>
 
 <style scoped>
-    .flex{
-        display: flex;
-        flex-direction: row;
-    }
-    .text{
-        margin-left: 10px;
-    }
+        .font-span{
+            white-space: pre;
+        }
 </style>

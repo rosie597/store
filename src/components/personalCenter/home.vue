@@ -10,27 +10,25 @@
         </div>
         <el-row class="atten">
           <el-col :span="4" :offset="6">
-              <span>{{baseInfo.popularity}}</span>
-              <p>人气</p>
+            <span>{{baseInfo.popularity}}</span>
+            <p>人气</p>
           </el-col>
           <el-col :span="4">
-            <router-link :to="{path:'/personalHome/focusfans',name:'focusfans',params:{id: userId}}" class="personalTag">
               <span>{{baseInfo.fansCount}}</span>
               <p>粉丝</p>
-            </router-link>
           </el-col>
           <el-col :span="4">
-            <router-link :to="{path:'/personalHome/focusfans',name:'focusfans',params:{id: userId}}" class="personalTag">
               <span>{{baseInfo.followCount}}</span>
               <p>关注</p>
-            </router-link>
           </el-col>
         </el-row>
         <div class="tabBox">
           <el-row class="tab-top">
-           <el-col :span="2" :offset="9" class="tab-tag active"><p><a href="javascript:;" @click="changeTab(0)">发布记录</a></p><span></span></el-col>
+           <el-col :span="2" :offset="7" class="tab-tag active"><p><a href="javascript:;" @click="changeTab(0)">发布记录</a></p><span></span></el-col>
            <el-col :span="2" class="tab-tag"><p><a href="javascript:;" @click="changeTab(1)">收藏夹</a></p><span></span></el-col>
            <el-col :span="2" class="tab-tag"><p><a href="javascript:;" @click="changeTab(2)">资料</a></p><span></span></el-col>
+           <el-col :span="2" class="tab-tag"><p><a href="javascript:;" @click="changeTab(3)">粉丝</a></p><span></span></el-col>
+           <el-col :span="2" class="tab-tag"><p><a href="javascript:;" @click="changeTab(4)">关注</a></p><span></span></el-col>
           </el-row>
           <div class="tab-content" style="background: #f6f6f6;padding-bottom: 10px;padding-top: 10px;">
             <!--发布记录-->
@@ -59,9 +57,9 @@
                 <div v-for="(item,index) in workList" style="width: 208px;margin: 0 10px;display: inline-block;">
                   <b-card img-top class="work">
                     <a  v-if="!visitorFlag" href="javascript:;" class="deleteButton" @click="deleteFavorite(item.id,index)">×</a>
-                    <b-card-img @click="checkWork(item.workId)" :src="item.cover" class="authorPicture"></b-card-img>
+                    <b-card-img @click="checkWork(item.id)" :src="item.cover" class="authorPicture"></b-card-img>
                     <div class="author">
-                      <p  @click="checkWork(item.workId)">{{item.title}}</p>
+                      <p  @click="checkWork(item.id)">{{item.title}}</p>
                       <img @click="checkUser(item.userId)" :src="item.avatar" :alt="item.nickname">
                       <strong @click="checkUser(item.userId)">{{item.nickname}}</strong>
                       <span>{{item.postTime}}</span>
@@ -191,7 +189,13 @@
                 <el-col :span="16" class="data">{{viewData.constellation}}</el-col>
               </el-row>
             </div>
-          </div>
+            <div class="tab-show fansBox">
+              <fans :userId="userId"></fans>
+            </div>
+            <div class="tab-show followBox">
+              <follow :userId="userId"></follow>
+            </div>
+            </div>
         </div>
     </div>
     <imgCrop field="file"
@@ -211,6 +215,8 @@
   import Datepicker from 'vuejs-datepicker';
   import {zh} from 'vuejs-datepicker/dist/locale'
   import calendar from './calendar'
+  import fans from './tab/fans'
+  import follow from './tab/follow'
 
   let personalTabTag,personalTabShow;
   if (typeof window.onload != "function"){
@@ -229,7 +235,7 @@
 
   export default {
     name: "record",
-    components: { VDistpicker ,Datepicker,calendar,imgCrop},
+    components: { VDistpicker ,Datepicker,calendar,imgCrop, fans, follow},
     data: function () {
       return {
         //图片裁剪工具
@@ -285,6 +291,11 @@
           { text: '女', value: 0 },
           { text: '保密', value: 2 }
         ],
+        sexOption:{
+          1:'男',
+          0:'女',
+          2:'保密'
+        },
         uploadData:{
           avatar: '',
           name: '',
@@ -388,7 +399,6 @@
     },
     methods:{
       cropImgSuccess(res, field){
-        console.log(res);
         this.materialData.avatar = res.data;
       },
       cropImgFail(status, field){
@@ -571,6 +581,7 @@
           self.viewData = res.data.data;
           self.viewData.birthdayYear = res.data.data.birthday.substr(0,4);
           self.viewData.birthdayMonth = res.data.data.birthday.substr(5,2);
+          self.viewData.sex = self.sexOption[res.data.data.sex];
           self.country = res.data.data.country;
           self.province = res.data.data.province;
           self.area = res.data.data.area;
@@ -592,7 +603,6 @@
       let currentId = this.$route.params.id;
       let cookieId = this.getCookieId();
       this.userId = currentId || cookieId;
-
       this.visitorFlag = cookieId != this.userId;
       let self = this;
       this.setRecordType('');
@@ -606,9 +616,6 @@
       if (this.visitorFlag){
         this.viewDataGet();
       }
-    },
-    deactivated() {
-      this.$destroy()
     }
   }
 </script>

@@ -14,7 +14,7 @@
 			</div>
 			<div class="hoverBox"  :style="$store.state.isLogin?'right:80px;':'right:160px;'">
 				<span class="hover_b" @click="toMail" v-if='$store.state.isLogin' @mouseover="hoverFn(1)" @mouseout="hoverFn(2)">
-				站内信
+				消息
 					<i class="noteIcon" v-if="hasNotice"></i>
 				</span>
 				<!-- 站内信滑过框 -->

@@ -45,14 +45,19 @@ export default {
 }
 .footer{
   width: 100%;
-  height: 40px;
+  height:36px;
+  position: fixed;
+  bottom: 0;
+  box-shadow:0px 12px 16px 8px rgba(0,0,0,0.42);
   text-align: right;
-  font-size: 18px;
+  line-height: 46px;
+  font-size: 14px;
   margin-top: 130px;
-  padding-top: 10px;
-  padding-right: 10px;
-  background-color: #f5f5f5;
+  padding-right: 15px;
+  background-color: #fff;
   color:#666;
   z-index: 99;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
 }
 </style>

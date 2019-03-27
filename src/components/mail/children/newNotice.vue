@@ -1,5 +1,5 @@
 <template>
-	<div >
+	<div class='1'>
            <div class="comment-head">
                 <span v-if="item.sendAvatar === null"   class="notice-icon" >  
                     <span    class="notice-icon-font" >公</span>  

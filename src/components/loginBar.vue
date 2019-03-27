@@ -13,7 +13,7 @@
     				<!-- 登陆表单 -->
     				<el-form :model="ruleForm"  :rules="rules" ref="ruleForm"  class="form" v-loading.fullscreen.lock="fullscreenLoading" element-loading-text="加载中..." v-if='status' key='form1'>
 					  <el-form-item prop="account">
-					    <el-input type="text" v-model="ruleForm.account" autocomplete="on" placeholder='请输入手机号或邮箱' class='loginIpt'></el-input>
+					    <el-input type="text" v-model="ruleForm.account" autocomplete="on" placeholder='请输入账号' class='loginIpt'></el-input>
 					  </el-form-item>
 					  <el-form-item prop="password">
 					    <el-input :type="passVisible1?'text':'password'" v-model="ruleForm.password" autocomplete="on" placeholder='请输入密码'  class='loginIpt' @keyup.enter.native="submitForm('ruleForm')"></el-input>
@@ -27,7 +27,7 @@
     				<!-- 注册表单 -->
     				<el-form :model="ruleForm2"  :rules="rules2" ref="ruleForm2"  class="form" v-loading.fullscreen.lock="fullscreenLoading" element-loading-text="加载中..." v-if='!status' key='form2'>
 					  <el-form-item prop="account">
-					    <el-input type="text" v-model="ruleForm2.account" autocomplete="on" placeholder='请输入手机号或邮箱' class='loginIpt'></el-input>
+					    <el-input type="text" v-model="ruleForm2.account" autocomplete="on" placeholder='请输入账号' class='loginIpt'></el-input>
 					  </el-form-item>
 					  <el-form-item prop="password">
 					    <el-input :type="passVisible1?'text':'password'" v-model="ruleForm2.password" autocomplete="on" placeholder='请输入密码'  class='loginIpt'></el-input>
@@ -46,8 +46,8 @@
     			</div>
     			<div class="icon_bar">
     				<img :src="wechatOn?loginImgs[1]:loginImgs[0]" 
-    				@mouseover="hoverFn(0)"  @mouseout="hoverFn(1)" style="cursor: pointer;">
-    				<img :src="qqOn?loginImgs[3]:loginImgs[2]" @mouseover="hoverFn(2)" @mouseout="hoverFn(3)"style="cursor: pointer;">
+    				@mouseover="hoverFn(0)"  @mouseout="hoverFn(1)" style="cursor: pointer;" id='wechatLogin' @click='wechatLogin'>
+    				<img :src="qqOn?loginImgs[3]:loginImgs[2]" @mouseover="hoverFn(2)" @mouseout="hoverFn(3)"style="cursor: pointer;" id='qqLogin' @click='qqLogin'>
     			</div>
     		</div>
 </template>
@@ -199,7 +199,7 @@
 				        this.$emit('listenSuccess')
 				        resolve()
         			}else{
-        				this.$message.error('登陆失败，请重新登陆');
+        				this.$message.error('登陆失败',res.data.message);
         				reject()
         			}
         			this.fullscreenLoading = false;
@@ -211,8 +211,19 @@
         		})
       			})
       		},
+      		//qq登录
+      		qqLogin(){
+      			console.log('qqlogin')
+     			window.open('http://www.colourcan.net/api/social/qq/login', '_blank')
+      			
+      		},
+      		//微信登录
+      		wechatLogin(){
+      			window.open('http://www.colourcan.net/api/social/weixin/login', '_blank')
+      		},
       		//注册请求
       		registFn(res){
+      			var that=this
       			var data={}
       			if(/^1[34578]\d{9}$/.test(res.account)){
       				data={
@@ -230,18 +241,19 @@
         			method:'post',
         			url:this.domainName+'/user/regist',
         			data:data
-        		}).then((res1)=>{
-        			if(res1.data.code==20000){
+        		}).then((res)=>{
+        			if(res.data.code==20000){
         				this.$message({
 				          message: '注册成功',
 				          type: 'success'
 				        });
-				        // this.tab_='tab1'
-				        // this.status=true
-				        this.$emit('regist')
-				        this.loginReq(res)
+				        this.tab_='tab1'
+				        this.status=true
+				        that.loginReq(that.ruleForm2)
+				        that.$emit('regist')
+
         			}else{
-        				this.$message.error(res1.data.message);
+        				this.$message.error('注册失败',res.data.message);
         			}
         			this.fullscreenLoading = false;
         		}).catch((err)=>{
@@ -272,16 +284,20 @@
 						this.passVisible2=!this.passVisible2
 					}break;
 				}
-			}
+			},
 		},
 		mounted(){
 			this.tab_=this.tab
 			this.status=this.tab_=='tab1'?true:false
+			QC.Login({
+                    btnId:"qqLogin",
+            });
+
 		}
 	}
 </script>
 <style scoped>
-		.login_bar{
+	.login_bar{
 		width: 30%;
 		background-color: white;
 		display: flex;
