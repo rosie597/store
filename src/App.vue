@@ -56,7 +56,7 @@ export default {
   padding-right: 15px;
   background-color: #fff;
   color:#666;
-  z-index: 99;
+  z-index: 999;
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
 }

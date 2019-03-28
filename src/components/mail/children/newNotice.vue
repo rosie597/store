@@ -5,8 +5,8 @@
                     <span    class="notice-icon-font" >公</span>  
                 </span>
                 <img v-if="item.sendAvatar" :src="item.sendAvatar">
-                </div><!--公告-->
-                <div class="comment-content">
+            </div><!--公告-->
+            <div class="comment-content">
                 <div class="commentuser-margin-bottom">
                     <span v-if="item.sendAvatar === null" class="font-span commentuser-margin-right">公告</span>
                     <span v-else class="font-span commentuser-margin-right">{{item.sendNickname}}</span>

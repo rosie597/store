@@ -27,7 +27,7 @@
 				</div>
 			<!-- </div>
 			<div class="hoverBox" :style="$store.state.isLogin?'':'margin-left:15%;'"> -->
-				<span class="hover_b" @click="toContribute()" @mouseenter="hoverFn(3)" @mouseleave="hoverFn(4)">投稿</span>
+				<span class="hover_b" @click="toContribute(0)" @mouseenter="hoverFn(3)" @mouseleave="hoverFn(4)">投稿</span>
 				<!-- 投稿划过框 -->
 				<div class="itemsBox" v-if="isItemShow" @mouseenter="hoverFn(3)" @mouseleave="hoverFn(4)" :style="$store.state.isLogin?'':'left:-19px;'">
 					<span v-for="(item,index) of items" :key='item' class="item_" @click="toContribute(index)">{{item}}</span>
@@ -288,6 +288,9 @@
 	                    	}break;
 	                    	case 6:{
 	                    		data.msg='你有新提醒'
+	                    	}break;
+	                    	case 7:{
+	                    		data.msg='你的作品已下架'
 	                    	}break;
 	                    }
 	                    if(that.notice.length<3){

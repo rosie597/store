@@ -736,7 +736,7 @@
                 url:this.domainName+'/favourite',
                 data:{
                     workId:this.ownerId,
-                    type: this.type
+                    type: this.workType
                 },
                 headers:{
                         'Content-Type': 'application/json',
