@@ -2,7 +2,7 @@
   <div id="app">
     <top-bar></top-bar>
     <router-view/>
-    <div class="footer">粤ICP备17128595号-2</div>
+    <div class="footer1">粤ICP备17128595号-2</div>
   </div>
 </template>
 
@@ -43,7 +43,7 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
 }
-.footer{
+.footer1{
   width: 100%;
   height:36px;
   position: fixed;

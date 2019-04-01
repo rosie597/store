@@ -1,7 +1,7 @@
 <template>
 	<div class="topBar">
 		<div class="top">
-	        <span class="top_logo">logo</span>
+	        <img src='./../../static/imgs/icon.png' class="top_logo"></img>
 		    <div class="box1">
 		    	<span :class="$route.path.endsWith('/')?linkClass[0]:linkClass[1]" @click="$router.replace('/')">作品</span>
 		    	<span :class="$route.path.includes('/photo')?linkClass[0]:linkClass[1]" @click="$router.replace('/photo')">摄影</span>
@@ -291,6 +291,7 @@
 	                    	}break;
 	                    	case 7:{
 	                    		data.msg='你的作品已下架'
+	                    		console.log(data)
 	                    	}break;
 	                    }
 	                    if(that.notice.length<3){
@@ -401,9 +402,7 @@
 	}
 	.top_logo{
 		width: 50px;
-		height: 16px;
-		color: #5867F7;
-		font-size: 15px;
+		height: 50px;
 	}
 	.nav{
 		display: flex;

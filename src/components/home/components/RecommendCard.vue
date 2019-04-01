@@ -43,6 +43,7 @@ export default {
   margin: 5px 10px;
   color: #515151;
   background-color: #fff;
+  cursor: pointer;
 }
 
 .rank-card:hover {

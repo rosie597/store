@@ -21,6 +21,9 @@
                         <!-- <p  v-if="item.action === 4" class="font-span margin-bottom-16">{{item.sendCommentContent}}</p> -->
                         <p  v-if="item.action === 5" class="font-span margin-bottom-16">关注了你</p>
                         <p  v-if="item.action === 6" class="font-span margin-bottom-16">{{item.targetId}}</p>
+                        <p v-if="item.action == 7" class="font-span margin-bottom-16">
+                            下架了作品《{{item.targetName}}》
+                        </p>
                     </div><!--评论的内容-->
 
                 </div><!--评论回复内容区域-->
