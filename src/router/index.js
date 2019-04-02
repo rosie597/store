@@ -8,6 +8,7 @@ import search from '../components/search'
 import articles from '../components/articles'
 import contribute from '../components/contribute/preview'
 import mail from '../components/mail/mail'
+import about from '../components/about'
 
 // 个人中心
 import personalHome from '../components/personalCenter/home'
@@ -22,6 +23,12 @@ import preview from '../components/contribute/preview'
 import allMail from '../components/mail/children/all'
 import commentMail from '../components/mail/children/comment'
 import noticeMail from '../components/mail/children/notice'
+
+//文字说明子路由
+import protocol from '../components/about/protocol'
+import rubric from '../components/about/rubric'
+import tipoff from '../components/about/tipoff'
+import tips from '../components/about/tips'
 
 Vue.use(Router)
 
@@ -52,6 +59,18 @@ export default new Router({
       path: '/search',
       name: 'search',
       component: search
+    },
+    {
+      path: '/about',
+      name: 'about',
+      component: about,
+      children:[
+        {path:'protocol',name:'protocol',component:protocol},
+        {path:'rubric',name:'rubric',component:rubric},
+        {path:'tipoff',name:'tipoff',component:tipoff},
+        {path:'tips',name:'tips',component:tips},
+        {path:'/about',redirect:'/about/rubric'}
+      ]
     },
     {
       path: '/mail',

@@ -86,6 +86,7 @@
           <b-row class="footer">
             <b-col cols="12">
               <b-button style="width: 200px;" @click="post" variant="primary" class="button">提交发布</b-button>
+              <a @click="$router.replace('/about/tips')">投稿注意事项</a>
             </b-col>
           </b-row>
         </div>
@@ -227,6 +228,9 @@
     background-color: #f5f5f5;
     overflow: hidden;
     margin-top: 56px;
+  }
+  a{
+    cursor: pointer;
   }
   .content{
     overflow: hidden;

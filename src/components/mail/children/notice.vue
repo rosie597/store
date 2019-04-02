@@ -32,7 +32,9 @@ export default {
         NoticeCurrentPage(page){
             //  this.page = page;
             this.$emit('NoticeCurrentPage',{pageNum:page,type:1})
-        }
+        },
+        
+
     }
 }
 	

@@ -2,16 +2,17 @@
   <div id="app">
     <top-bar></top-bar>
     <router-view/>
-    <div class="footer1">粤ICP备17128595号-2</div>
+    <Footer></Footer>
   </div>
 </template>
 
 <script>
   import topBar from './components/topBar'
+  import Footer from './components/footer'
 export default {
   name: 'App',
   components:{
-    topBar
+    topBar,Footer
   },
   methods:{
   },
@@ -43,7 +44,7 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
 }
-.footer1{
+/*.footer1{
   width: 100%;
   height:36px;
   position: fixed;
@@ -59,5 +60,5 @@ export default {
   z-index: 999;
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
-}
+}*/
 </style>
