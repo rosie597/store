@@ -179,6 +179,7 @@ export default {
     width: 1136px;
     margin: 0 auto;
     background-color: #fff;
+		min-height: 800px
   }
 	.nav-bg{
 		background-color: #FFFFFF;

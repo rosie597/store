@@ -203,6 +203,9 @@
 </script>
 
 <style scoped>
+.tab-content{
+  min-height: 500px
+}
   .home{
       padding: 0;
       background-color: #f5f5f5;
