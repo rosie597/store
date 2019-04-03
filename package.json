@@ -10,7 +10,8 @@
     "build": "node build/build.js"
   },
   "dependencies": {
-    "boostrap": "^4.2.1",
+    "ajv-keywords": "^3.4.0",
+    "axios": "^0.18.0",
     "bootstrap-vue": "^2.0.0-rc.13",
     "element-ui": "^2.5.2",
     "font-awesome": "^4.7.0",
@@ -18,6 +19,7 @@
     "jsonp": "^0.2.1",
     "lib-flexible": "^0.3.2",
     "popper.js": "^1.14.6",
+    "stompjs": "^2.3.3",
     "v-datepicker": "^0.0.1",
     "v-distpicker": "^1.1.0",
     "vue": "^2.5.2",
