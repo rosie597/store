@@ -223,7 +223,7 @@
             /** */   
             comment:[],
             /* 排序，倒序*/
-            value:'',
+            value: 'timedesc',
             stateList: [
                 {
                     value: 'timedesc',
@@ -291,7 +291,7 @@
         //同时处理文章跟评论
         getAll(){
             let that = this;
-            this.$axios.all([this.getDetail(),this.getComment(),this.getCallWork(),this.getCollectionWork()]).then(
+            this.$axios.all([this.getDetail(),this.getComment({sortType:'timedesc'}),this.getCallWork(),this.getCollectionWork()]).then(
                 this.$axios.spread(function(res, perms,call,collection){
                      if(res.data.code === 20000){
                         that.userId = res.data.data.work.userId,//作者ID
@@ -446,11 +446,19 @@
                             }
                         }).then((res)=>{
                             if(res.data.code === 20000 ){
+                                var date = new Date(res.data.data.createTime);
+                                let Y = date.getFullYear() + '-';
+                                let M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
+                                let D = date.getDate()<10? '0'+date.getDate()+' ':date.getDate()+ ' ';
+                                let h = date.getHours()<10? '0'+date.getHours()+':' : date.getHours() + ':';
+                                let m = date.getMinutes()<10? '0'+date.getMinutes()+':' :date.getMinutes()+ ':';
+                                let s = date.getSeconds()<10?'0'+date.getSeconds() : date.getSeconds(); 
                                 postData.likeNum = 0;
-                                postData.id = res.data.data;
+                                postData.id = res.data.data.id;
+                                postData.createTime = Y+M+D+h+m+s;
                                 postData.showCall = false;
+                                console.log('postDta',postData)
                                 this.comment.unshift(postData);
-
                                 this.commentValue = '';
                                 this.$message({
                                     message: '发表评论成功',
