@@ -625,6 +625,9 @@
       padding: 0;
       background-color: #f5f5f5;
   }
+  .tab-content{
+    min-height: 500px
+  }
   .content{
     overflow: hidden;
     zoom: 1;

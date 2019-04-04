@@ -7,10 +7,15 @@
                 <img v-if="item.sendAvatar" :src="item.sendAvatar">
             </div><!--公告-->
             <div class="comment-content">
-                <div class="commentuser-margin-bottom">
+                <div class="commentuser-margin-bottom" style="overflow:hidden">
                     <span v-if="item.sendAvatar === null" class="font-span commentuser-margin-right">公告</span>
                     <span v-else class="font-span commentuser-margin-right">{{item.sendNickname}}</span>
                     <em class="font-em">{{item.sendDate}}</em>
+                    <!-- <span  class="font-span commentuser-margin-right" style="float:right"> -->
+                        <!-- <a>删除</a> -->
+                        <!-- <el-button type="text">删除</el-button> -->
+                        <!-- <el-button type='text'>删除</el-button> -->
+                    </span>
                     </div>
                 <!--评论的人名和时间-->
                     <div>
