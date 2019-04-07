@@ -57,9 +57,9 @@
                 <div v-for="(item,index) in workList" style="width: 208px;margin: 0 10px;display: inline-block;">
                   <b-card img-top class="work">
                     <a  v-if="!visitorFlag" href="javascript:;" class="deleteButton" @click="deleteFavorite(item.id,index)">×</a>
-                    <b-card-img @click="checkWork(item.id)" :src="item.cover" class="authorPicture"></b-card-img>
+                    <b-card-img @click="checkWork(item.workId)" :src="item.cover" class="authorPicture"></b-card-img>
                     <div class="author">
-                      <p  @click="checkWork(item.id)">{{item.title}}</p>
+                      <p  @click="checkWork(item.workId)">{{item.title}}</p>
                       <img @click="checkUser(item.userId)" :src="item.avatar" :alt="item.nickname">
                       <strong @click="checkUser(item.userId)">{{item.nickname}}</strong>
                       <span>{{item.postTime}}</span>

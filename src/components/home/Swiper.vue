@@ -2,7 +2,7 @@
   <div class="swiper">
     <swiper :options="swiperOption" ref="mySwiper">
       <swiper-slide v-for="cover of covers" :key="cover.id">
-        <img class="img" :src="cover.url">
+        <a :href="cover.redirectUrl?cover.redirectUrl||javascript:void(0)" target="_Blank"><img class="img" :src="cover.url" rel="nofollow noreferrer"></a>
       </swiper-slide>
       <div class="swiper-pagination" slot="pagination"></div>
       <div class="swiper-button-prev swiper-button-black" slot="button-prev"></div>
@@ -67,6 +67,9 @@ export default {
         }).catch((err)=>{
           console.log(err)
         })
+    },
+    toNewPage(url){
+      window.open(url)
     }
   },
 
